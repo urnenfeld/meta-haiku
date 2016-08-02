@@ -1,0 +1,19 @@
+diff --git a/src/kits/kernel/atomic.c b/src/kits/kernel/atomic.c
+index 4b43bdc..4e8fde6 100644
+--- a/src/kits/kernel/atomic.c
++++ b/src/kits/kernel/atomic.c
+@@ -32,13 +32,7 @@
+ 
+ static inline int32 atomic_exchange(vint32 *value, int32 old, int32 new)
+ {
+-	__asm__ __volatile__(
+-		"lock; cmpxchg %1, %2"
+-			: "+a" (old)
+-			: "r" (new), "m" (__gcc_noalias__(value))
+-			: "memory");
+-
+-	return old;
++	return atomic_cmpxchg(value, old, new);
+ }
+ 
+ 

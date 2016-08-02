@@ -2,7 +2,8 @@ SUMMARY = "Cosmoe, Haiku userland on top of Linux/BSD/Darwin based kernel/system
 HOMEPAGE = "http://github.com/Ithamar/cosmoe"
 
 SRC_URI = "git://github.com/Ithamar/cosmoe.git;protocol=https\
-	   file://x11_unsafe_crosscompilation.patch"
+	   file://x11_unsafe_crosscompilation.patch \
+	   file://atomic_exchange_kernel.patch"
 
 SRCREV = "${AUTOREV}"
 
@@ -16,4 +17,23 @@ LICENSE = "MIT"
 # This is supossed to be the most complete solution at the time according to the README
 # EXTRA_OECONF +=  "--enable-sdl"
 
+# Hopefully something like this could work in original makefile
+# EXTRA_OEMAKE += "kits"
+
+do_compile () {
+    # trick to build only the kits which results in libcosmoe.so
+    cd ${S}/src/kits
+    oe_runmake    
+}
+
 inherit autotools-brokensep
+
+# Install task AFTER inheriting, to override autotools class install task
+do_install () {
+
+	install -d -m 755 ${D}${libdir}
+	install -p -m 644 src/kits/objs/libcosmoe.so ${D}${libdir}
+
+}
+
+
