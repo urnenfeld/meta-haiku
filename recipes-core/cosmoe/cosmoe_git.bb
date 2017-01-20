@@ -9,6 +9,9 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git" 
 
+# Possibly also a RDEPENDS
+DEPENDS = "libpng jpeg freetype"
+
 # Cosmoe project cointains inside several licenses, mainly comming from Haiku Inc,
 # Point to a Be Sample code license
 LIC_FILES_CHKSUM = "file://src/apps/pulse/LICENSE;md5=4da74da693b41d0eda596b70885fa7ad"
