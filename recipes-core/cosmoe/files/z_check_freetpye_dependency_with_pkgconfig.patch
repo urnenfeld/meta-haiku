@@ -1,0 +1,42 @@
+diff --git a/configure.in b/configure.in
+index fcc87ed..6eff2fe 100644
+--- a/configure.in
++++ b/configure.in
+@@ -73,12 +73,24 @@ AC_CHECK_HEADER(sys/xattr.h,
+   AC_MSG_WARN([
+ *** This build of Cosmoe will not support attributes.]))
+ 
+-AC_CHECK_PROG(FREETYPE_CONFIG, freetype-config, yes)
+-if eval "test x$FREETYPE_CONFIG != xyes"; then
+-   AC_MSG_ERROR([
+-*** Cosmoe requires libfreetype version 2.0 or later.])
++
++dnl Testing presence of free-config
++AC_MSG_CHECKING([pkg-config m4 macros])
++if test m4_ifdef([PKG_CHECK_MODULES], [yes], [no]) == yes; then
++	AC_MSG_RESULT([yes]);
++else
++	AC_MSG_RESULT([no]);
++	AC_MSG_ERROR([
++pkg-config is required.
++See pkg-config.freedesktop.org])
+ fi
+ 
++PKG_CHECK_MODULES([FREETYPE2], [freetype2], 
++    CFLAGS="$CFLAGS $FREETYPE2_CFLAGS"
++    LDFLAGS="$LDFLAGS $FREETYPE2_LIBS",
++    AC_MSG_ERROR([*** Unable to find FreeType2 library (http://www.freetype.org/)])
++)
++
+ dnl Checks for typedefs, structures, and compiler characteristics.
+ AC_C_CONST
+ AC_C_INLINE
+@@ -139,7 +151,7 @@ if test -z "$VIDEODRVLIB"; then
+    VIDEODRVCFLAGS=""
+    AC_MSG_RESULT(yes)
+    AC_CHECK_LIB(X11, XOpenDisplay,,AC_MSG_ERROR([
+-*** Cosmoe requires libX11 when configured to use X11.]),[-L/usr/X11R6/lib])
++*** Cosmoe requires libX11 when configured to use X11.]),[-lX11])
+    AC_CHECK_HEADER(X11/Xlib.h,,AC_MSG_ERROR([
+ *** Cosmoe requires X11 development headers when configured to use X11.]),)
+    AC_DEFINE(COSMOE_XWINDOWS, [], [Use XWindows for graphics output])
