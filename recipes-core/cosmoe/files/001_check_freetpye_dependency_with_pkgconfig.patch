@@ -31,12 +31,4 @@ index fcc87ed..6eff2fe 100644
  dnl Checks for typedefs, structures, and compiler characteristics.
  AC_C_CONST
  AC_C_INLINE
-@@ -139,7 +151,7 @@ if test -z "$VIDEODRVLIB"; then
-    VIDEODRVCFLAGS=""
-    AC_MSG_RESULT(yes)
-    AC_CHECK_LIB(X11, XOpenDisplay,,AC_MSG_ERROR([
--*** Cosmoe requires libX11 when configured to use X11.]),[-L/usr/X11R6/lib])
-+*** Cosmoe requires libX11 when configured to use X11.]),[-lX11])
-    AC_CHECK_HEADER(X11/Xlib.h,,AC_MSG_ERROR([
- *** Cosmoe requires X11 development headers when configured to use X11.]),)
-    AC_DEFINE(COSMOE_XWINDOWS, [], [Use XWindows for graphics output])
+

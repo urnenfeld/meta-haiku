@@ -2,15 +2,16 @@ SUMMARY = "Cosmoe, Haiku userland on top of Linux/BSD/Darwin based kernel/system
 HOMEPAGE = "http://github.com/Ithamar/cosmoe"
 
 SRC_URI = "git://github.com/Ithamar/cosmoe.git;protocol=https\
-	   file://x11_unsafe_crosscompilation.patch \
-	   file://atomic_exchange_kernel.patch"
+	   file://000_x11_unsafe_crosscompilation.patch \
+	   file://atomic_exchange_kernel.patch  \
+	   file://001_check_freetpye_dependency_with_pkgconfig.patch"
 
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git" 
 
 # Possibly also a RDEPENDS
-DEPENDS = "libpng jpeg freetype"
+DEPENDS = "libpng jpeg freetype pkgconfig-native"
 
 # If building the whole package this will be needed
 # DEPENDS = "pkgconfig-native"
@@ -27,22 +28,18 @@ LICENSE = "MIT"
 # Hopefully something like this could work in original makefile
 # EXTRA_OEMAKE += "kits"
 
-
 inherit autotools-brokensep
 
-do_compile () {
-    # trick to build only the kits which results in libcosmoe.so
-    cd ${S}/src/kits
-	echo we are in pluma $PWD
-    oe_runmake    
-}
+#do_compile () {
+#    # trick to build only the kits which results in libcosmoe.so
+#    cd ${S}/src/kits
+#    oe_runmake
+#}
 
 # Install task AFTER inheriting, to override autotools class install task
-do_install () {
-
-	install -d -m 755 ${D}${libdir}
-	install -p -m 644 src/kits/objs/libcosmoe.so ${D}${libdir}
-
-}
+#do_install () {
+#	install -d -m 755 ${D}${libdir}
+#	install -p -m 644 src/kits/objs/libcosmoe.so ${D}${libdir}
+#}
 
 
