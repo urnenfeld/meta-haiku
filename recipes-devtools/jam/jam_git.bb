@@ -9,3 +9,4 @@ S = "${WORKDIR}/git/jam"
 LICENSE = "custom"
 LIC_FILES_CHKSUM = "file://README;md5=2aaba14ff23856010e6b6000a4e45fd6"
 
+do_configure[noexec] = "1"
