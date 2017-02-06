@@ -1,6 +1,6 @@
 # This Items are built from Haiku common source tree
 
-require haikucore
+inherit haikucore
 
 
 # HAIKU_USE_PRIVATE_HEADERS
