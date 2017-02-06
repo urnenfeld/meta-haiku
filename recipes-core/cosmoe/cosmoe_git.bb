@@ -4,7 +4,8 @@ HOMEPAGE = "http://github.com/Ithamar/cosmoe"
 SRC_URI = "git://github.com/Ithamar/cosmoe.git;protocol=https\
 	   file://000_x11_unsafe_crosscompilation.patch \
 	   file://atomic_exchange_kernel.patch  \
-	   file://001_check_freetpye_dependency_with_pkgconfig.patch"
+	   file://001_check_freetpye_dependency_with_pkgconfig.patch \
+	   file://002_makefilein_not_using_freetype_conf.patch"
 
 SRCREV = "${AUTOREV}"
 
@@ -27,6 +28,11 @@ LICENSE = "MIT"
 
 # Hopefully something like this could work in original makefile
 # EXTRA_OEMAKE += "kits"
+
+#EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
+EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -I${PKG_CONFIG_SYSROOT_DIR}/usr/include/freetype2'"
+
+#CFLAGS += "-I${PKG_CONFIG_SYSROOT_DIR}/usr/include/freetype2"
 
 inherit autotools-brokensep
 

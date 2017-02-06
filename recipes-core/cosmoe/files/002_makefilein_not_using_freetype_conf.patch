@@ -1,0 +1,48 @@
+diff --git a/src/add-ons/translators/bmptranslator/Makefile.in b/src/add-ons/translators/bmptranslator/Makefile.in
+index aa7fbd3..552b7af 100644
+--- a/src/add-ons/translators/bmptranslator/Makefile.in
++++ b/src/add-ons/translators/bmptranslator/Makefile.in
+@@ -3,7 +3,7 @@ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ bindir=@bindir@
+ 
+-CFLAGS  = -pipe -O2 -g `freetype-config --cflags` -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
++CFLAGS  = -pipe -O2 -g -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
+ CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wnon-virtual-dtor
+ 
+ CC	= @CC@
+diff --git a/src/add-ons/translators/pngtranslator/Makefile.in b/src/add-ons/translators/pngtranslator/Makefile.in
+index aab65ae..2ab0c54 100644
+--- a/src/add-ons/translators/pngtranslator/Makefile.in
++++ b/src/add-ons/translators/pngtranslator/Makefile.in
+@@ -3,7 +3,7 @@ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ bindir=@bindir@
+ 
+-CFLAGS  = -pipe -O2 -g `freetype-config --cflags` -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
++CFLAGS  = -pipe -O2 -g -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
+ CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wnon-virtual-dtor
+ 
+ CC	= @CC@
+diff --git a/src/servers/app/Makefile.in b/src/servers/app/Makefile.in
+index f0bdc7c..ee96321 100755
+--- a/src/servers/app/Makefile.in
++++ b/src/servers/app/Makefile.in
+@@ -4,7 +4,7 @@ exec_prefix=@exec_prefix@
+ bindir=@bindir@
+ fontdir=@FONTDIR@
+ 
+-CFLAGS  = -pipe -O2 -g `freetype-config --cflags` @VIDEODRVCFLAGS@ -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
++CFLAGS  = -pipe -O2 -g @VIDEODRVCFLAGS@ -c -Wall -Wno-multichar `cat @top_srcdir@/cosmoe.specs`
+ CPPFLAGS= $(CFLAGS) -Woverloaded-virtual -Wnon-virtual-dtor
+ 
+ CC	= @CC@
+@@ -37,7 +37,7 @@ $(OBJDIR):
+ 	mkdir $(OBJDIR)
+ 
+ $(OBJDIR)/$(EXE): $(OBJS) $(COSMOELIBDIR)/libcosmoe.@LIBEXT@ Makefile
+-	$(CC) -g -rdynamic $(OBJS) -o $(OBJDIR)/$(EXE) `freetype-config --libs` @VIDEODRVLIB@ -L$(COSMOELIBDIR) -lcosmoe -lpng -lz -lm -lstdc++ -lpthread
++	$(CC) -g -rdynamic $(OBJS) -o $(OBJDIR)/$(EXE) @VIDEODRVLIB@ -L$(COSMOELIBDIR) -lcosmoe -lpng -lz -lm -lstdc++ -lpthread
+ 
+ install: $(OBJDIR)/$(EXE) $(bindir) $(fontdir)
+ 	cp -f $(OBJDIR)/$(EXE) $(bindir)
