@@ -6,6 +6,12 @@ SRCREV = "${AUTOREV}"
 
 LICENSE = "MIT"
 
-WORKDIR = "${TMPDIR}/work-shared/${PN}-${PV}-${PR}"
+inherit haikucore
 
-# B = "${WORKDIR}/${PN}-${PV}"
+WORKDIR = "${HAIKU_SRC}"
+
+
+# B = S
+# S = ${WORKDIR}/${PN}-${PV}
+# S = ${WORKDIR}/${BP}/
+# BP = ${BPN}-${PV}

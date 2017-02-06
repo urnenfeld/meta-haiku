@@ -1,7 +1,17 @@
 SUMMARY = "Haiku uses a custom fork of Perforce's Jam."
 HOMEPAGE = "https://www.haiku-os.org/"
 
+inherit native
+
 SRC_URI = "git://git.haiku-os.org/buildtools;protocol=https"
 SRCREV = "${AUTOREV}"
 
+S = "${WORKDIR}/git/jam"
+
 LICENSE = "custom"
+LIC_FILES_CHKSUM = "file://README;md5=2aaba14ff23856010e6b6000a4e45fd6"
+
+do_configure[noexec] = "1"
+
+# Problem @do_compile
+# | ar: invalid option -- 'n'
