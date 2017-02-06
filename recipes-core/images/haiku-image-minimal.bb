@@ -2,10 +2,8 @@ inherit core-image
 
 IMAGE_FEATURES += "splash ssh-server-dropbear"
 
-set_hostname (){
-     #!/bin/sh -e
-     echo "Haiku" > ${IMAGE_ROOTFS}/etc/hostname;
-}
+# TODO: Can this be done here?
+hostname_pn-base-files = "HaikuBox"
 
 set_haiku_links () {
 
