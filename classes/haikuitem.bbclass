@@ -2,20 +2,16 @@
 
 inherit haikucore
 
-
 # HAIKU_USE_PRIVATE_HEADERS
 # HAIKU_USE_HEADERS 
-
 
 def addPrivateHaikuPath(e):
     pass
     # CFLAGS_prepend = "-I${HAIKU_SRC}/headers/private/e "
-
     
 def addHaikuPath(e):
     pass
     # CFLAGS_prepend = "-I${HAIKU_SRC}/headers/e "
-
 
 python () {
     privateElements = d.getVar('HAIKU_USE_PRIVATE_HEADERS', True)
@@ -27,9 +23,15 @@ python () {
     if elements:
         for element in elements:
             addPrivatePath(element)
-
 }
 
 
+def generateSourcePath(haikuSources, haikuSourcesItem):
+    return os.path.join(haikuSources, "src", *haikuSourcesItem.split(" "))
 
+do_fetch () {
+
+	cp -r "${@generateSourcePath("${HAIKU_SRC_LOCATION}","${HAIKU_SOURCE_ITEM}")}" ${S}
+
+}
 
