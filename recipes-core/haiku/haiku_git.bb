@@ -4,12 +4,12 @@ HOMEPAGE = "https://www.haiku-os.org/"
 SRC_URI = "git://git.haiku-os.org/${PN};protocol=https"
 SRCREV = "${AUTOREV}"
 
-LICENSE = "MIT"
-
 inherit haikucore
 
-WORKDIR = "${HAIKU_SRC}"
+WORKDIR = "${HAIKU_LOCATION}"
 
+# point to git instead of WORKDIR/haiku_git
+S = "${WORKDIR}${HAIKU_SRC_POSTFIX}"
 
 # B = S
 # S = ${WORKDIR}/${PN}-${PV}

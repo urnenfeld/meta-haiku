@@ -1,9 +1,10 @@
 inherit core-image
 
-IMAGE_FEATURES += "splash ssh-server-dropbear"
+IMAGE_FEATURES += "ssh-server-dropbear"
+IMAGE_INSTALL += "mc"
 
-# TODO: Can this be done here?
-hostname_pn-base-files = "HaikuBox"
+# TODO: move to base files
+# hostname_pn-base-files = "HaikuBox"
 
 set_haiku_links () {
 
@@ -11,9 +12,9 @@ set_haiku_links () {
   mkdir ${IMAGE_ROOTFS}/Haiku/system
   mkdir ${IMAGE_ROOTFS}/Haiku/trash
   
-  ln -s ${IMAGE_ROOTFS}/home/ ${IMAGE_ROOTFS}/Haiku/home
+  ln -s /home/ ${IMAGE_ROOTFS}/Haiku/home
   
 
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "set_hostname; set_haiku_links;"
+ROOTFS_POSTPROCESS_COMMAND += "set_haiku_links;"
