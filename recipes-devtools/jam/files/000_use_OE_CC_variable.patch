@@ -1,0 +1,12 @@
+diff --git a/jam/Makefile b/jam/Makefile
+index d287a84..7397518 100644
+--- jam/Makefile
++++ jam/Makefile
+@@ -1,6 +1,6 @@
+ # Makefile for jam
+ 
+-CC = cc
++# CC = cc
+ CFLAGS = -O
+ EXENAME = ./jam0
+ TARGET = -o $(EXENAME)
