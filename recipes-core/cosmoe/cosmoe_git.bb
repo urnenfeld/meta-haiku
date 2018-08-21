@@ -23,6 +23,9 @@ DEPENDS = "libpng jpeg freetype pkgconfig-native"
 LIC_FILES_CHKSUM = "file://src/apps/pulse/LICENSE;md5=4da74da693b41d0eda596b70885fa7ad"
 LICENSE = "MIT"
 
+# Configure task will fail if there is not a X windowing system available
+# TODO: Require or Report this situation
+
 # This is supossed to be the most complete solution at the time according to the README
 # EXTRA_OECONF +=  "--enable-sdl"
 
