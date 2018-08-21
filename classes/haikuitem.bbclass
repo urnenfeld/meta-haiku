@@ -1,37 +1,38 @@
 # This Items are built from Haiku common source tree
+# In class variables
+#   HAIKU_SRC_LOCATION (haikucore)
+#   HAIKU_USE_PRIVATE_HEADERS (user)
+#   HAIKU_USE_OS_HEADERS (user)
+# Output class variables
+#   HAIKU_HEADERS
 
 inherit haikucore
 
-# HAIKU_USE_PRIVATE_HEADERS
-# HAIKU_USE_HEADERS 
-
-def addPrivateHaikuPath(e):
-    pass
-    # CFLAGS_prepend = "-I${HAIKU_SRC}/headers/private/e "
-    
-def addHaikuPath(e):
-    pass
-    # CFLAGS_prepend = "-I${HAIKU_SRC}/headers/e "
-
 python () {
+
+    def currentHeader():
+        header = d.getVar("HAIKU_HEADERS", "")
+        if header is None:
+            return "-I${HAIKU_SRC_LOCATION}/headers/"
+        else:
+            return header
+
+    def addHaikuPath(section,path):
+        header = currentHeader() + " -I${HAIKU_SRC_LOCATION}/headers/"+section+"/" + path
+        d.setVar("HAIKU_HEADERS", header)
+        
+
     privateElements = d.getVar('HAIKU_USE_PRIVATE_HEADERS', True)
     if privateElements:
-        for element in privateElements:
-            addPrivatePath(element)
+        for element in privateElements.split(" "):
+            addHaikuPath("private", element)
 
-    elements = d.getVar('HAIKU_USE_HEADERS', True)
-    if elements:
-        for element in elements:
-            addPrivatePath(element)
-}
-
-
-def generateSourcePath(haikuSources, haikuSourcesItem):
-    return os.path.join(haikuSources, "src", *haikuSourcesItem.split(" "))
-
-do_fetch () {
-
-	cp -r "${@generateSourcePath("${HAIKU_SRC_LOCATION}","${HAIKU_SOURCE_ITEM}")}" ${S}
+    osElements = d.getVar('HAIKU_USE_OS_HEADERS', True)
+    if osElements:
+        addHaikuPath("os","") #add the root of as well os
+        for element in osElements.split(" "):
+            addHaikuPath("os", element)
 
 }
+
 
