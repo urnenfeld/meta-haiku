@@ -16,6 +16,6 @@ inherit haikuitem
 
 do_compile() {
 
-    ${CC} ${HAIKU_HEADERS} area.c
+    ${CC} ${HAIKU_HEADERS} -D${HAIKU_TARGET_ARCH} area.c
 
 }
