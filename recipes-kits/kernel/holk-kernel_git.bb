@@ -12,10 +12,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c25dca6f05d3d0d952c7fe9373c8b429"
 
 HAIKU_USE_OS_HEADERS = "support storage kernel"
 
+
 inherit haikuitem
 
 do_compile() {
 
-    ${CC} ${HAIKU_HEADERS} -D${HAIKU_TARGET_ARCH} area.c
+    ${CC} ${HAIKU_HEADERS} -D${HAIKU_TARGET_ARCH} -shared -o libbe.so area.c sem.c port.c thread.c misc.c image.c real_time_clock.c
 
 }

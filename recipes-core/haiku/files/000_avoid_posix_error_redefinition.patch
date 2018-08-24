@@ -1,0 +1,20 @@
+diff --git a/headers/os/support/Errors.h b/headers/os/support/Errors.h
+index 592a5a4..db77b38 100644
+--- a/headers/os/support/Errors.h
++++ b/headers/os/support/Errors.h
+@@ -128,6 +128,7 @@
+ #endif
+ 
+ #define B_POSIX_ENOMEM	B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 0)
++#if HOLK_REDEFINE_POSIX_ERRORS
+ #define E2BIG			B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 1)
+ #define ECHILD			B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 2)
+ #define EDEADLK			B_TO_POSIX_ERROR(B_POSIX_ERROR_BASE + 3)
+@@ -221,6 +222,7 @@
+ #define ELOOP			B_TO_POSIX_ERROR(B_LINK_LIMIT)
+ #define ENOEXEC			B_TO_POSIX_ERROR(B_NOT_AN_EXECUTABLE)
+ #define EPIPE			B_TO_POSIX_ERROR(B_BUSTED_PIPE)
++#endif
+ 
+ /* new error codes that can be mapped to POSIX errors */
+ #define B_BUFFER_OVERFLOW			B_FROM_POSIX_ERROR(EOVERFLOW)
